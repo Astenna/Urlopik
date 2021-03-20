@@ -8,11 +8,47 @@ import {
   Container,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { useState } from "react";
 import { useAuthenticationStyles } from "./AuthenticationStyles";
+import history from "../../helpers/History";
+import { newUserUrl } from "../../helpers/ApiURLs";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const SignUp = () => {
   const classes = useAuthenticationStyles();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleSubmit = () => {
+    // TODO: uncomment when backend ready
+    // createNewUser();
+    history.push("/sign-in");
+  };
+
+  const createNewUser = () => {
+    let postData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post(newUserUrl, postData)
+      .then(() => {
+        toast("Successfully created a new user", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch(() => {
+        toast.error("There is a problem with creating a new user", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      });
+  };
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -31,8 +67,9 @@ export const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
                 label="First Name"
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
                 autoFocus
               />
             </Grid>
@@ -41,9 +78,9 @@ export const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
                 label="Last Name"
-                name="lastName"
+                value={lastName}
+                onChange={(event) => setLastName(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -51,9 +88,9 @@ export const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
                 label="Email Address"
-                name="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -61,10 +98,10 @@ export const SignUp = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
                 label="Password"
                 type="password"
-                id="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </Grid>
           </Grid>
@@ -74,6 +111,7 @@ export const SignUp = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign Up
           </Button>

@@ -8,10 +8,54 @@ import {
   Button,
   Grid,
   Link,
+  FormControl,
 } from "@material-ui/core";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import {
+  isUserSignedIn,
+  jwtToLocalStorage,
+  setAuthorizationToken,
+} from "../../helpers/AuthenticationHelpers";
+import history from "../../helpers/History";
+import { loginUrl } from "../../helpers/ApiURLs";
 
 export const SignIn = () => {
   const classes = useAuthenticationStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // TODO: uncomment when backend ready
+    // loginUser()
+    //   .then((response) => {
+    //     jwtToLocalStorage(response);
+    //     setAuthorizationToken(response);
+    //   })
+    //   .then(() => {
+    //     if (isUserSignedIn()) {
+    //       history.push("/home");
+    //     }
+    //   });
+  };
+
+  const loginUser = () => {
+    let loginData = {
+      email: email,
+      password: password,
+    };
+    return axios
+      .post(loginUrl, loginData)
+      .then((response) => {
+        return response.data;
+      })
+      .catch(() => {
+        toast.error("Invalid username / password");
+        history.push("/unauthorized");
+      });
+  };
 
   return (
     <Container maxWidth="xs">
@@ -22,7 +66,7 @@ export const SignIn = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <FormControl className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -31,6 +75,8 @@ export const SignIn = () => {
             id="email"
             label="Email Address"
             name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             autoFocus
           />
           <TextField
@@ -41,14 +87,16 @@ export const SignIn = () => {
             name="password"
             label="Password"
             type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             id="password"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
@@ -59,7 +107,7 @@ export const SignIn = () => {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </FormControl>
       </div>
     </Container>
   );

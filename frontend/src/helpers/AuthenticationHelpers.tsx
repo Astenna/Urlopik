@@ -1,7 +1,7 @@
 import axios from "axios";
 import history from "./History";
 
-export const IsUserSignedIn = () => {
+export const isUserSignedIn = () => {
   let jwtToken = localStorage.getItem("JWT");
   if (jwtToken !== undefined && jwtToken !== null) {
     return true;
