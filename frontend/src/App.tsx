@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import history from "./History";
+import history from "./helpers/History";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Router, Switch, Route } from "react-router-dom";
 import {
   setAuthorizationToken,
   getJwtTokenFromLocalStorage,
-} from "./AuthenticationHelpers";
+} from "./helpers/AuthenticationHelpers";
 import { SignIn, SignUp } from "./components/AuthenticationComponents/index";
+import { CircularProgress } from "@material-ui/core";
 
 export const App = () => {
   const [redirectTo500, setRedirectTo500] = useState(false);
@@ -64,6 +65,7 @@ export const App = () => {
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
         </Switch>
+        {loading && <CircularProgress />}
       </div>
     </Router>
   );
