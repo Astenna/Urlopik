@@ -44,8 +44,9 @@ namespace Urlopik
                             ValidateAudience = false, // TODO: validate audience & issuer
                             ValidateIssuerSigningKey = true,
                             ValidateLifetime = false,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AuthOptions")
-                                                                                        .GetValue<string>("Key"))),
+                            IssuerSigningKey = 
+                                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AuthOptions")
+                                                           .GetValue<string>("Key"))),
                         };
                     });
 
