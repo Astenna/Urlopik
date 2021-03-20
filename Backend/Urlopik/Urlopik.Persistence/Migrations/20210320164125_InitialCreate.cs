@@ -9,7 +9,7 @@ namespace Urlopik.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ApplicationUsers",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -24,11 +24,11 @@ namespace Urlopik.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationUsers", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApplicationUsers_ApplicationUsers_SupervisorId",
+                        name: "FK_Users_Users_SupervisorId",
                         column: x => x.SupervisorId,
-                        principalTable: "ApplicationUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -65,9 +65,9 @@ namespace Urlopik.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Vacations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vacations_ApplicationUsers_VacationerId",
+                        name: "FK_Vacations_Users_VacationerId",
                         column: x => x.VacationerId,
-                        principalTable: "ApplicationUsers",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -79,8 +79,8 @@ namespace Urlopik.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationUsers_SupervisorId",
-                table: "ApplicationUsers",
+                name: "IX_Users_SupervisorId",
+                table: "Users",
                 column: "SupervisorId");
 
             migrationBuilder.CreateIndex(
@@ -100,7 +100,7 @@ namespace Urlopik.Persistence.Migrations
                 name: "Vacations");
 
             migrationBuilder.DropTable(
-                name: "ApplicationUsers");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "VacationTypes");

@@ -56,7 +56,7 @@ namespace Urlopik.Persistence.Migrations
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("ApplicationUsers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Urlopik.Persistence.Models.Vacation", b =>

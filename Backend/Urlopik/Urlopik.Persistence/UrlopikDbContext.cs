@@ -7,7 +7,7 @@ namespace Urlopik.Data
     {
         public UrlopikDbContext(DbContextOptions<UrlopikDbContext> options) : base(options) { }
 
-        public DbSet<User> ApplicationUsers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Vacation> Vacations { get; set; }
         

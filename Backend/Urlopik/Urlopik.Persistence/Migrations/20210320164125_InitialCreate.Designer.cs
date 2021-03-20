@@ -10,7 +10,7 @@ using Urlopik.Data;
 namespace Urlopik.Persistence.Migrations
 {
     [DbContext(typeof(UrlopikDbContext))]
-    [Migration("20210320161502_InitialCreate")]
+    [Migration("20210320164125_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace Urlopik.Persistence.Migrations
 
                     b.HasIndex("SupervisorId");
 
-                    b.ToTable("ApplicationUsers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Urlopik.Persistence.Models.Vacation", b =>
