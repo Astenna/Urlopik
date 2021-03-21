@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Urlopik.Persistence.Models;
 
-namespace Urlopik.Data
+namespace Urlopik.Persistence
 {
     public class UrlopikDbContext : DbContext
     {
