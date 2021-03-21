@@ -29,6 +29,17 @@ services:
             - postgres
         restart: unless-stopped
 
+    urlopik:
+        container_name: urlopik
+        build: .
+        environment:
+            - ASPNETCORE_URLS=https://+;http://+;
+        ports: 
+            - "5000:80"
+        networks:
+            - postgres
+        restart: unless-stopped
+
 networks:
     postgres:
         driver: bridge # for linux containers
