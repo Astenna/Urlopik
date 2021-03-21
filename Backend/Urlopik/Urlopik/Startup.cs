@@ -32,6 +32,15 @@ namespace Urlopik
 
             app.UseHttpsRedirection();
 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseGlobalExceptionMiddleware();
+            app.UseSwagger();
             app.UseRouting();
 
             app.UseAuthorization();
