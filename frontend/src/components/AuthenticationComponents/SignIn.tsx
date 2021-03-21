@@ -29,14 +29,12 @@ export const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     loginUser()
-      .then((response) => {
-        console.log(response);
-        jwtToLocalStorage(response);
-        setAuthorizationToken(response);
+      .then((tokenObj) => {
+        jwtToLocalStorage(tokenObj.accessToken);
+        setAuthorizationToken(tokenObj.accessToken);
       })
       .then(() => {
         if (isUserSignedIn()) {
-          console.log("Ło kurwa");
         }
       });
   };
