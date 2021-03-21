@@ -28,17 +28,17 @@ export const SignIn = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // TODO: uncomment when backend ready
-    // loginUser()
-    //   .then((response) => {
-    //     jwtToLocalStorage(response);
-    //     setAuthorizationToken(response);
-    //   })
-    //   .then(() => {
-    //     if (isUserSignedIn()) {
-    //       history.push("/home");
-    //     }
-    //   });
+    loginUser()
+      .then((response) => {
+        console.log(response);
+        jwtToLocalStorage(response);
+        setAuthorizationToken(response);
+      })
+      .then(() => {
+        if (isUserSignedIn()) {
+          console.log("Ło kurwa");
+        }
+      });
   };
 
   const loginUser = () => {

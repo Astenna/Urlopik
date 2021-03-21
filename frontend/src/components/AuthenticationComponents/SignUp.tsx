@@ -23,8 +23,7 @@ export const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = () => {
-    // TODO: uncomment when backend ready
-    // createNewUser();
+    createNewUser();
     history.push("/sign-in");
   };
 
