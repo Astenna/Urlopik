@@ -35,6 +35,7 @@ export const SignIn = () => {
       })
       .then(() => {
         if (isUserSignedIn()) {
+          history.push("/home-page");
         }
       });
   };

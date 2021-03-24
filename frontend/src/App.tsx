@@ -9,6 +9,7 @@ import {
   getJwtTokenFromLocalStorage,
 } from "./helpers/AuthenticationHelpers";
 import { SignIn, SignUp } from "./components/AuthenticationComponents/index";
+import  HomePage  from "./components/HomePageComponents/HomePage";///////////
 import { CircularProgress } from "@material-ui/core";
 
 export const App = () => {
@@ -64,6 +65,7 @@ export const App = () => {
           <Route exact path="/" component={SignIn} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
+          <Route path="/home-page" component={HomePage} />
         </Switch>
         {loading && <CircularProgress />}
       </div>
