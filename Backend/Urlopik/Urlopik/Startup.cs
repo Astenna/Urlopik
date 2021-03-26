@@ -18,6 +18,7 @@ using Urlopik.Application.Services;
 using Urlopik.Application.Services.Tokens;
 using Urlopik.Extensions;
 using Urlopik.Persistence;
+using Urlopik.Persistence.AutoMigrations;
 
 namespace Urlopik
 {
@@ -84,11 +85,14 @@ namespace Urlopik
             services.AddScoped<IUserService, UserService>();
 
             services.AddControllers();
-            services.AddDbContext<UrlopikDbContext>(o => o.UseNpgsql(Configuration.GetValue<string>("ConnectionString")));
+            services.AddDbContext<UrlopikDbContext>(o => o.UseNpgsql(Configuration.GetValue<string>("ConnectionString")))
+                    .AddAutomigrations<UrlopikDbContext>(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAutoMigration();
+
             app.UseCors(builder => builder
               .AllowAnyOrigin()
               .AllowAnyMethod()
