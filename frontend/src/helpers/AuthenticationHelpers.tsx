@@ -30,3 +30,11 @@ export const jwtToLocalStorage = (token) => {
 export const getJwtTokenFromLocalStorage = () => {
   return localStorage.getItem("JWT");
 };
+
+export const roleToLocalStorage = (role) => {
+  localStorage.setItem("ROLE", role);
+};
+
+export const getRoleFromLocalStorage = () => {
+  return localStorage.getItem("ROLE");
+};
