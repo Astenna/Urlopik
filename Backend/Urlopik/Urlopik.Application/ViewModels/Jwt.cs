@@ -1,4 +1,4 @@
-﻿namespace Urlopik.Application.Dtos
+﻿namespace Urlopik.Application.ViewModels
 {
     public class Jwt
     {

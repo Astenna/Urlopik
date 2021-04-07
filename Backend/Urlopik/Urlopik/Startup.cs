@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Urlopik.Application.Dtos;
 using Urlopik.Application.Mapper;
 using Urlopik.Application.Options;
 using Urlopik.Application.Services;
@@ -50,6 +52,10 @@ namespace Urlopik
                                                            .GetValue<string>("Key"))),
                         };
                     });
+
+
+            services.AddMvc()
+                    .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<RegisterDtoValidator>());
 
             services.AddSwaggerGen(c =>
             {
@@ -94,9 +100,9 @@ namespace Urlopik
             app.UseAutoMigration();
 
             app.UseCors(builder => builder
-              .AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader());
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 
             app.UseGlobalExceptionMiddleware();
             app.UseSwagger();

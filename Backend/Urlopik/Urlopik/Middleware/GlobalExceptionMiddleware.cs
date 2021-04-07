@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -39,25 +40,27 @@ namespace Urlopik.Middleware
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<GlobalExceptionMiddleware> logger)
         {
+            context.Response.ContentType = "application/json";
+
             switch (ex)
             {
                 case ApiException apiException:
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    await context.Response.WriteAsync(apiException.Message);
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(apiException.Message));
                     break;
-                //case FluentValidation.ValidationException validationException:
-                    // TODO: Add fluent validations
-                   // break;
+                case FluentValidation.ValidationException validationException:
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(validationException.Message));
+                    break;
                 case UnauthorizedAccessException _:
                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                     break;
                 default:
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    await context.Response.WriteAsync(ex.Message);
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(ex.Message));
                     break;
             }
 
-            context.Response.ContentType = "application/json";
             logger.LogWarning($"Error {context.Response} occurred during processing the request {context.Request}. " +
                 $"Server responded with {context.Response.StatusCode}");
         }

@@ -1,4 +1,4 @@
-﻿using Urlopik.Application.Dtos;
+﻿using Urlopik.Application.ViewModels;
 
 namespace Urlopik.Application.Services.Tokens
 {

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Financer.Application.Dtos;
-using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -30,6 +29,11 @@ namespace Urlopik.Application.Services
             if (IsEmailAlreadyInUse(registerDto.Email))
             {
                 throw new ApiException($"Email: {registerDto.Email} already in use!");
+            }
+
+            if (registerDto.SupervisorId.HasValue && !_urlopikDbContext.Users.Any(x => x.Id == registerDto.SupervisorId))
+            { 
+                throw new ApiException($"Supervisor: {registerDto.SupervisorId} does not exist!");
             }
 
             var salt = new byte[HashSaltSize];

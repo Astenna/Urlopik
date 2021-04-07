@@ -7,9 +7,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using Urlopik.Application.Dtos;
 using Urlopik.Application.Exceptions;
 using Urlopik.Application.Options;
+using Urlopik.Application.ViewModels;
 using Urlopik.Persistence;
 using Urlopik.Persistence.Models;
 
