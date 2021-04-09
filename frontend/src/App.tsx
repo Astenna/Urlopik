@@ -9,8 +9,9 @@ import {
   getJwtTokenFromLocalStorage,
 } from "./helpers/AuthenticationHelpers";
 import { SignIn, SignUp } from "./components/AuthenticationComponents/index";
-import  HomePage  from "./components/HomePageComponents/HomePage";///////////
+import HomePage from "./components/HomePageComponents/HomePage"; ///////////
 import { CircularProgress } from "@material-ui/core";
+import { Unauthorized } from "./components/AuthenticationComponents/Unauthorized";
 
 export const App = () => {
   const [redirectTo500, setRedirectTo500] = useState(false);
@@ -66,6 +67,7 @@ export const App = () => {
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/home-page" component={HomePage} />
+          <Route path="/unauthorized" component={Unauthorized} />
         </Switch>
         {loading && <CircularProgress />}
       </div>

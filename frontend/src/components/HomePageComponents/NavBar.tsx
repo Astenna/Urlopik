@@ -1,6 +1,6 @@
 import { AppBar, Button, Link, Toolbar, Typography } from "@material-ui/core";
-import React from "react";
 import { useHomePageStyles } from "./HomePageStyles";
+import { removeToken } from "../../helpers/AuthenticationHelpers";
 
 export const NavBar = () => {
   const classes = useHomePageStyles();
@@ -47,7 +47,7 @@ export const NavBar = () => {
           </Link>
         </nav>
         <Button
-          href="/sign-in"
+          onClick={removeToken}
           color="primary"
           variant="outlined"
           className={classes.link}

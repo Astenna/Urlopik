@@ -24,7 +24,7 @@ export default function HomePage() {
           color="textPrimary"
           gutterBottom
         >
-          Kalendarz
+          Calendar
         </Typography>
         <Typography
           variant="h5"
@@ -32,9 +32,7 @@ export default function HomePage() {
           color="textSecondary"
           component="p"
         >
-          Zaplanuj swój urlop oraz określ jego rodzaj. Złóż wniosek do działu HR
-          i ciesz się swoimi wymarzonymi wakacjami. Przenalizuj swój kalendarz
-          aby jak najefektywniej wykorzystać swój urlop.
+          Plan your vacation!
         </Typography>
       </Container>
       {/* End hero unit */}
