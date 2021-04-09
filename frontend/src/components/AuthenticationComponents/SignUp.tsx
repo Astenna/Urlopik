@@ -9,14 +9,14 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { useState } from "react";
-import { useAuthenticationStyles } from "./AuthenticationStyles";
+import { useFormStyles } from "../../styles/FormStyles";
 import history from "../../helpers/History";
 import { newUserUrl } from "../../helpers/ApiURLs";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export const SignUp = () => {
-  const classes = useAuthenticationStyles();
+  const classes = useFormStyles();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
