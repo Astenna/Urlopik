@@ -13,11 +13,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using Urlopik.Application.Dtos;
 using Urlopik.Application.Mapper;
 using Urlopik.Application.Options;
+using Urlopik.Application.Queries;
 using Urlopik.Application.Services;
 using Urlopik.Application.Services.Tokens;
+using Urlopik.Application.Services.VacationService;
 using Urlopik.Extensions;
 using Urlopik.Persistence;
 using Urlopik.Persistence.AutoMigrations;
@@ -63,6 +66,7 @@ namespace Urlopik
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 //c.IncludeXmlComments(xmlPath);
+                c.DescribeAllParametersInCamelCase();
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -75,11 +79,11 @@ namespace Urlopik
                     {
                         new OpenApiSecurityScheme
                         {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
                         },
                         new string[] { }
                     }
@@ -89,8 +93,14 @@ namespace Urlopik
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IVacationService, VacationService>();
+            services.AddScoped<IVacationsQueryBuilder, VacationsQueryBuilder>();
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddJsonOptions(jsonOptions =>
+                    {
+                        jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    });
             services.AddDbContext<UrlopikDbContext>(o => o.UseNpgsql(Configuration.GetValue<string>("ConnectionString")))
                     .AddAutomigrations<UrlopikDbContext>(Configuration);
         }

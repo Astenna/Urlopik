@@ -3,7 +3,7 @@ using System;
 
 namespace Urlopik.Application.Dtos
 {
-    public class CreateVacationDto
+    public class VacationDto
     {
         public int TypeId { get; set; }
 
@@ -14,7 +14,7 @@ namespace Urlopik.Application.Dtos
         public string Description { get; set; }
     }
 
-    public class CreateVacationDtoValidator : AbstractValidator<CreateVacationDto>
+    public class CreateVacationDtoValidator : AbstractValidator<VacationDto>
     {
         public CreateVacationDtoValidator()
         {
