@@ -1,5 +1,4 @@
 import { AppBar, Button, Link, Toolbar, Typography } from "@material-ui/core";
-import React from "react";
 import { useHomePageStyles } from "./HomePageStyles";
 import { removeToken } from "../../helpers/AuthenticationHelpers";
 

@@ -30,7 +30,6 @@ export const SignIn = () => {
     event.preventDefault();
     loginUser()
       .then((tokenObj) => {
-        console.log("chuj", tokenObj);
         jwtToLocalStorage(tokenObj.accessToken);
         setAuthorizationToken(tokenObj.accessToken);
       })
