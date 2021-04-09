@@ -30,6 +30,7 @@ export const SignIn = () => {
     event.preventDefault();
     loginUser()
       .then((tokenObj) => {
+        console.log("chuj", tokenObj);
         jwtToLocalStorage(tokenObj.accessToken);
         setAuthorizationToken(tokenObj.accessToken);
       })
@@ -37,6 +38,10 @@ export const SignIn = () => {
         if (isUserSignedIn()) {
           history.push("/home-page");
         }
+      })
+      .catch(() => {
+        toast.error("Invalid username / password");
+        history.push("/unauthorized");
       });
   };
 
@@ -45,15 +50,9 @@ export const SignIn = () => {
       email: email,
       password: password,
     };
-    return axios
-      .post(loginUrl, loginData)
-      .then((response) => {
-        return response.data;
-      })
-      .catch(() => {
-        toast.error("Invalid username / password");
-        history.push("/unauthorized");
-      });
+    return axios.post(loginUrl, loginData).then((response) => {
+      return response.data;
+    });
   };
 
   return (
