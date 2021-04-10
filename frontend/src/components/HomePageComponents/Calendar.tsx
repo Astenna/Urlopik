@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
-export const Calendar = ({ vacations }) => {
+export const Calendar = ({
+  vacations,
+  newVacationDetailsVisible,
+  setNewVacationDetailsVisible,
+}) => {
   const [events, setEvents] = useState(vacations);
   console.log(events);
 
   const vacationClicked = (clickInfo) => {
     console.log(clickInfo.event.title);
+    setNewVacationDetailsVisible(!newVacationDetailsVisible);
   };
 
   useEffect(() => setEvents(vacations), [vacations]);
