@@ -1,9 +1,9 @@
 import { Button, Container, Typography } from "@material-ui/core";
 import history from "../../helpers/History";
-import { useAuthenticationStyles } from "./AuthenticationStyles";
+import { useFormStyles } from "../../styles/FormStyles";
 
 export const Unauthorized = () => {
-  const classes = useAuthenticationStyles();
+  const classes = useFormStyles();
 
   return (
     <Container maxWidth="xs">

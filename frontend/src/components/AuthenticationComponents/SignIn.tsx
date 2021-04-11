@@ -1,5 +1,5 @@
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { useAuthenticationStyles } from "./AuthenticationStyles";
+import { useFormStyles } from "../../styles/FormStyles";
 import {
   Container,
   Avatar,
@@ -22,7 +22,7 @@ import history from "../../helpers/History";
 import { loginUrl } from "../../helpers/ApiURLs";
 
 export const SignIn = () => {
-  const classes = useAuthenticationStyles();
+  const classes = useFormStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
