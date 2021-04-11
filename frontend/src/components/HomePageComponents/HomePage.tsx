@@ -15,6 +15,7 @@ export default function HomePage() {
   const [newVacationDetailsVisible, setNewVacationDetailsVisible] = useState(
     false
   );
+  const [clickInfo, setClickInfo] = useState(false);
 
   const [vacations, setVacations] = useState([
     {
@@ -70,12 +71,13 @@ export default function HomePage() {
           vacations={vacations}
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
+          setClickInfo={setClickInfo}
         />
         {
           <VacationDetailsDialog
             open={newVacationDetailsVisible}
             setOpen={setNewVacationDetailsVisible}
-            details={vacations}
+            details={clickInfo}
           />
         }
       </Container>

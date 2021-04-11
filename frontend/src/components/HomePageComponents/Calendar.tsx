@@ -6,13 +6,15 @@ export const Calendar = ({
   vacations,
   newVacationDetailsVisible,
   setNewVacationDetailsVisible,
+  setClickInfo,
 }) => {
   const [events, setEvents] = useState(vacations);
   console.log(events);
 
   const vacationClicked = (clickInfo) => {
-    console.log(clickInfo.event.title);
+    console.log(clickInfo.event);
     setNewVacationDetailsVisible(!newVacationDetailsVisible);
+    setClickInfo(clickInfo);
   };
 
   useEffect(() => setEvents(vacations), [vacations]);
