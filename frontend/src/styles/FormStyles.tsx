@@ -1,12 +1,12 @@
 import { makeStyles } from "@material-ui/core";
 
 // TODO: Change it to css (if necessary)
-export const useAuthenticationStyles = makeStyles((theme) => ({
+export const useFormStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    padding: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
