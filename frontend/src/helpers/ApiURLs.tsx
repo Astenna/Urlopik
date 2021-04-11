@@ -5,3 +5,7 @@ export const BASE_URL = "http://localhost:5000/api/";
 export const meUrl = BASE_URL + "users/me";
 export const loginUrl = BASE_URL + "users/login";
 export const newUserUrl = BASE_URL + "users/register";
+
+// Vacations
+
+export const vacationsUrl = BASE_URL + "vacation";

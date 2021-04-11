@@ -25,9 +25,9 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
 
   const handleSubmit = () => {
     const newVacation = {
-      id: 1,
-      title: "Tomasz Zawadzki",
-      start: from,
+      typeId: type,
+      dateFrom: from,
+      dateTo: to,
       description,
     };
     createVacation(newVacation);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import { useHomePageStyles } from "./HomePageStyles";
@@ -8,6 +8,10 @@ import { NavBar } from "./NavBar";
 import { VacationDialog } from "../VacationComponents/VacationDialog";
 import { Calendar } from "./Calendar";
 import { VacationDetailsDialog } from "../VacationComponents/VacationDetailsDialog";
+import history from "../../helpers/History";
+import axios from "axios";
+import { vacationsUrl } from "../../helpers/ApiURLs";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
   const classes = useHomePageStyles();
@@ -16,20 +20,41 @@ export default function HomePage() {
     false
   );
 
-  const [vacations, setVacations] = useState([
-    {
-      id: 1,
-      title: "Tomasz Zawadzki",
-      start: "2021-04-10",
-      description: "none",
-      vacationType: "Sick leave",
-    },
-  ]);
+  const [vacations, setVacations] = useState([] as any);
 
   const createVacation = (newVacationData) => {
-    const currentVacations = vacations;
-    currentVacations.push(newVacationData);
-    setVacations(currentVacations);
+    // axios
+    //   .post(vacationsUrl, newVacationData)
+    //   .then(({ data }) => {
+    //     const { oldVacations } = vacations;
+    //     const newVacations = [...oldVacations, data];
+    //     setVacations(newVacations);
+    //   })
+    //   .catch((error) => {
+    //     toast.error(
+    //       "There is a problem with creating a new vacation: ",
+    //       error.response
+    //     );
+    //   });
+  };
+
+  useEffect(() => {
+    getVacations();
+  }, []);
+
+  const getVacations = () => {
+    axios
+      .get(vacationsUrl)
+      .then((response) => {
+        setVacations(response);
+      })
+      .catch((error) => {
+        toast.error(
+          "There is a problem with loading vacations: ",
+          error.response
+        );
+        history.push("/unauthorized");
+      });
   };
 
   return (
@@ -71,13 +96,13 @@ export default function HomePage() {
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
         />
-        {
+        {/* {
           <VacationDetailsDialog
             open={newVacationDetailsVisible}
             setOpen={setNewVacationDetailsVisible}
             details={vacations}
           />
-        }
+        } */}
       </Container>
       <Footer />
     </React.Fragment>
