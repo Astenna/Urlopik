@@ -6,13 +6,13 @@ export const Calendar = ({
   vacations,
   newVacationDetailsVisible,
   setNewVacationDetailsVisible,
+  newVacationVisible,
+  setNewVacationVisible,
   setClickInfo,
 }) => {
   const [events, setEvents] = useState(vacations);
-  console.log(events);
 
   const vacationClicked = (clickInfo) => {
-    console.log(clickInfo.event);
     setNewVacationDetailsVisible(!newVacationDetailsVisible);
     setClickInfo(clickInfo);
   };
@@ -26,6 +26,18 @@ export const Calendar = ({
       timeZone="UTC+2"
       events={events}
       eventClick={(clickInfo) => vacationClicked(clickInfo)}
+      headerToolbar={{
+        left: "title",
+        right: "myCustomButton today prev,next",
+      }}
+      customButtons={{
+        myCustomButton: {
+          text: "Plan Vacation",
+          click: function () {
+            setNewVacationVisible(!newVacationVisible);
+          },
+        },
+      }}
     />
   );
 };

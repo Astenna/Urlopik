@@ -36,10 +36,7 @@ export default function HomePage() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavBar
-        setNewVacationVisible={setNewVacationVisible}
-        newVacationVisible={newVacationVisible}
-      />
+      <NavBar />
       {
         <VacationDialog
           open={newVacationVisible}
@@ -71,6 +68,8 @@ export default function HomePage() {
           vacations={vacations}
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
+          newVacationVisible={newVacationVisible}
+          setNewVacationVisible={setNewVacationVisible}
           setClickInfo={setClickInfo}
         />
         {

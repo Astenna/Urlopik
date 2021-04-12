@@ -5,8 +5,11 @@ export const useFormStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "left",
     padding: theme.spacing(3),
+  },
+  dialogTitle: {
+    textAlign: "center",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -17,6 +20,11 @@ export const useFormStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 2, 2),
+    display: "inline-block",
+    width: "150px",
+  },
+  buttons: {
+    alignItems: "center",
   },
 }));

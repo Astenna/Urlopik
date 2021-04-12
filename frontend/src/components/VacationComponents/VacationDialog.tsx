@@ -40,7 +40,9 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
       className={classes.form}
     >
       <Paper className={classes.paper}>
-        <DialogTitle>Plan your vacation</DialogTitle>
+        <DialogTitle className={classes.dialogTitle}>
+          Plan your vacation
+        </DialogTitle>
         <Select
           value={type}
           onChange={(event) => setType(toString(event.target.value))}
@@ -68,24 +70,26 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={() => setOpen(false)}
-        >
-          Cancel
-        </Button>
+        <div className={classes.buttons}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </Paper>
     </Dialog>
   );

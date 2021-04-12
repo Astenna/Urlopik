@@ -2,7 +2,7 @@ import { AppBar, Button, Link, Toolbar, Typography } from "@material-ui/core";
 import { useHomePageStyles } from "./HomePageStyles";
 import { removeToken } from "../../helpers/AuthenticationHelpers";
 
-export const NavBar = ({ newVacationVisible, setNewVacationVisible }) => {
+export const NavBar = () => {
   const classes = useHomePageStyles();
   return (
     <AppBar
@@ -29,12 +29,6 @@ export const NavBar = ({ newVacationVisible, setNewVacationVisible }) => {
           Employee
         </Typography>
         <nav>
-          <Button
-            onClick={() => setNewVacationVisible(!newVacationVisible)}
-            className={classes.link}
-          >
-            Plan Vacation
-          </Button>
           <Link
             variant="button"
             color="textPrimary"
