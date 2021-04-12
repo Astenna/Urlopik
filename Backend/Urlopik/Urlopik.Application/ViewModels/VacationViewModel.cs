@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Urlopik.Application.ViewModels
 {
@@ -14,8 +15,10 @@ namespace Urlopik.Application.ViewModels
 
         public bool SupervisorAccepted { get; set; }
 
+        [JsonPropertyName("start")]
         public DateTime DateFrom { get; set; }
 
+        [JsonPropertyName("end")]
         public DateTime DateTo { get; set; }
 
         public string Description { get; set; }
