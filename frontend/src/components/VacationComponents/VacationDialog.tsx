@@ -11,10 +11,10 @@ import {
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { toString, values } from "ramda";
+import { vacationTypes } from "../HomePageComponents/utils";
 
 export const VacationDialog = ({ open, setOpen, createVacation }) => {
   const classes = useFormStyles();
-  const vacationTypes = { 1: "Vacation", 2: "Sick leave", 3: "On request" };
   const [type, setType] = useState(1);
   const [from, setFrom] = useState(moment().format("yyyy-MM-DD"));
   const [to, setTo] = useState(moment().format("yyyy-MM-DD"));

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { mapTypeToColor } from "../../helpers/enums";
+import { mapVacationToEvent } from "./utils";
 
 export const Calendar = ({
   vacations,
@@ -12,20 +13,14 @@ export const Calendar = ({
   const [events, setEvents] = useState([] as any);
 
   const vacationClicked = (clickInfo) => {
-    console.log(clickInfo.event);
     setNewVacationDetailsVisible(!newVacationDetailsVisible);
     setClickInfo(clickInfo);
   };
 
   useEffect(() => {
-    const mappedEvents = vacations.map((event) => ({
-      id: event.id,
-      start: event.start,
-      end: event.end,
-      description: event.description,
-      color: mapTypeToColor(event.typeId),
-      title: "Tomasz Zawadzki",
-    }));
+    const mappedEvents = vacations.map((vacation) =>
+      mapVacationToEvent(vacation)
+    );
     setEvents(mappedEvents);
   }, [vacations]);
 
@@ -34,7 +29,6 @@ export const Calendar = ({
       editable={true}
       plugins={[dayGridPlugin]}
       initialView="dayGridMonth"
-      timeZone="UTC+2"
       events={events}
       eventClick={(clickInfo) => vacationClicked(clickInfo)}
       displayEventTime={false}
