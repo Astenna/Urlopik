@@ -8,6 +8,12 @@ export const useFormStyles = makeStyles((theme) => ({
     alignItems: "left",
     padding: theme.spacing(3),
   },
+  signing: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: theme.spacing(3),
+  },
   dialogTitle: {
     textAlign: "center",
   },

@@ -50,7 +50,7 @@ export const SignUp = () => {
   };
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+      <div className={classes.signing}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>

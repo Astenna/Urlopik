@@ -56,7 +56,7 @@ export const SignIn = () => {
 
   return (
     <Container maxWidth="xs">
-      <div className={classes.paper}>
+      <div className={classes.signing}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -88,15 +88,17 @@ export const SignIn = () => {
             onChange={(event) => setPassword(event.target.value)}
             id="password"
           />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign In
-          </Button>
+          <div className={classes.buttons}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={handleSubmit}
+            >
+              Sign In
+            </Button>
+          </div>
           <Grid container>
             <Grid item xs>
               <Link href="/sign-up" variant="body2">

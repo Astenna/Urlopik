@@ -12,11 +12,7 @@ export const Calendar = ({
   setNewVacationVisible,
   setClickInfo,
 }) => {
-<<<<<<< HEAD
-  const [events, setEvents] = useState(vacations);
-=======
   const [events, setEvents] = useState([] as any);
->>>>>>> 7793044f8d6b88b2bc499a9e456896710ff40642
 
   const vacationClicked = (clickInfo) => {
     setNewVacationDetailsVisible(!newVacationDetailsVisible);
@@ -37,7 +33,7 @@ export const Calendar = ({
       initialView="dayGridMonth"
       events={events}
       eventClick={(clickInfo) => vacationClicked(clickInfo)}
-<<<<<<< HEAD
+      displayEventTime={false}
       headerToolbar={{
         left: "title",
         right: "myCustomButton today prev,next",
@@ -50,9 +46,6 @@ export const Calendar = ({
           },
         },
       }}
-=======
-      displayEventTime={false}
->>>>>>> 7793044f8d6b88b2bc499a9e456896710ff40642
     />
   );
 };
