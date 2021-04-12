@@ -10,12 +10,12 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { toString } from "ramda";
+import { toString, values } from "ramda";
+import { vacationTypes } from "../HomePageComponents/utils";
 
 export const VacationDialog = ({ open, setOpen, createVacation }) => {
   const classes = useFormStyles();
-  const vacationTypes = ["Vacation", "Sick leave", "On request"];
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(1);
   const [from, setFrom] = useState(moment().format("yyyy-MM-DD"));
   const [to, setTo] = useState(moment().format("yyyy-MM-DD"));
   const [description, setDescription] = useState("");
@@ -25,9 +25,9 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
 
   const handleSubmit = () => {
     const newVacation = {
-      id: 1,
-      title: "Tomasz Zawadzki",
-      start: from,
+      typeId: type,
+      dateFrom: from,
+      dateTo: to,
       description,
     };
     createVacation(newVacation);
@@ -45,10 +45,10 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
         </DialogTitle>
         <Select
           value={type}
-          onChange={(event) => setType(toString(event.target.value))}
+          onChange={(event) => setType(parseInt(toString(event.target.value)))}
         >
-          {vacationTypes.map((type, i) => (
-            <MenuItem key={i} value={i}>
+          {values(vacationTypes).map((type, i) => (
+            <MenuItem key={i} value={i + 1}>
               {type}
             </MenuItem>
           ))}
