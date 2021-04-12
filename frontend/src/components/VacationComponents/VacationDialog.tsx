@@ -10,12 +10,12 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { toString } from "ramda";
+import { toString, values } from "ramda";
 
 export const VacationDialog = ({ open, setOpen, createVacation }) => {
   const classes = useFormStyles();
-  const vacationTypes = ["Vacation", "Sick leave", "On request"];
-  const [type, setType] = useState(0);
+  const vacationTypes = { 1: "Vacation", 2: "Sick leave", 3: "On request" };
+  const [type, setType] = useState(1);
   const [from, setFrom] = useState(moment().format("yyyy-MM-DD"));
   const [to, setTo] = useState(moment().format("yyyy-MM-DD"));
   const [description, setDescription] = useState("");
@@ -43,10 +43,10 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
         <DialogTitle>Plan your vacation</DialogTitle>
         <Select
           value={type}
-          onChange={(event) => setType(toString(event.target.value))}
+          onChange={(event) => setType(parseInt(toString(event.target.value)))}
         >
-          {vacationTypes.map((type, i) => (
-            <MenuItem key={i} value={i}>
+          {values(vacationTypes).map((type, i) => (
+            <MenuItem key={i} value={i + 1}>
               {type}
             </MenuItem>
           ))}

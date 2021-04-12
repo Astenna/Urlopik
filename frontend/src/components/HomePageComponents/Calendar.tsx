@@ -8,10 +8,8 @@ export const Calendar = ({
   setNewVacationDetailsVisible,
 }) => {
   const [events, setEvents] = useState(vacations);
-  console.log(events);
 
   const vacationClicked = (clickInfo) => {
-    console.log(clickInfo.event.title);
     setNewVacationDetailsVisible(!newVacationDetailsVisible);
   };
 

@@ -23,19 +23,20 @@ export default function HomePage() {
   const [vacations, setVacations] = useState([] as any);
 
   const createVacation = (newVacationData) => {
-    // axios
-    //   .post(vacationsUrl, newVacationData)
-    //   .then(({ data }) => {
-    //     const { oldVacations } = vacations;
-    //     const newVacations = [...oldVacations, data];
-    //     setVacations(newVacations);
-    //   })
-    //   .catch((error) => {
-    //     toast.error(
-    //       "There is a problem with creating a new vacation: ",
-    //       error.response
-    //     );
-    //   });
+    axios
+      .post(vacationsUrl, newVacationData)
+      .then(({ data }) => {
+        const { oldVacations } = vacations;
+        const newVacations = [...oldVacations, data];
+        setVacations(newVacations);
+      })
+      .catch((error) => {
+        toast.error(
+          "There is a problem with creating a new event: ",
+          error.response
+        );
+      });
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function HomePage() {
     axios
       .get(vacationsUrl)
       .then((response) => {
-        setVacations(response);
+        setVacations(response.data);
       })
       .catch((error) => {
         toast.error(
@@ -96,13 +97,13 @@ export default function HomePage() {
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
         />
-        {/* {
+        {
           <VacationDetailsDialog
             open={newVacationDetailsVisible}
             setOpen={setNewVacationDetailsVisible}
             details={vacations}
           />
-        } */}
+        }
       </Container>
       <Footer />
     </React.Fragment>
