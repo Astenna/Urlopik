@@ -37,12 +37,7 @@ export default function HomePage() {
           error.response
         );
       });
-    window.location.reload();
   };
-
-  useEffect(() => {
-    getVacations();
-  }, []);
 
   const getVacations = () => {
     axios
@@ -58,6 +53,10 @@ export default function HomePage() {
         history.push("/unauthorized");
       });
   };
+
+  useEffect(() => {
+    getVacations();
+  }, []);
 
   return (
     <React.Fragment>
