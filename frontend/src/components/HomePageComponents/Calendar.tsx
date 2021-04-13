@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { mapTypeToColor } from "../../helpers/enums";
 import { mapVacationToEvent } from "./utils";
 
 export const Calendar = ({
@@ -36,7 +35,7 @@ export const Calendar = ({
       displayEventTime={false}
       headerToolbar={{
         left: "title",
-        right: "myCustomButton today prev,next",
+        right: "myCustomButton prev,next today",
       }}
       customButtons={{
         myCustomButton: {
