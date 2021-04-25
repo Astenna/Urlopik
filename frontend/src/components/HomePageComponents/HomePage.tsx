@@ -29,13 +29,11 @@ export default function HomePage() {
       .then(({ data }) => {
         const { oldVacations } = vacations;
         const newVacations = [...oldVacations, data];
+        toast.success("Successfully created a vacation");
         setVacations(newVacations);
       })
       .catch((error) => {
-        toast.error(
-          "There is a problem with creating a new event: ",
-          error.response
-        );
+        error.response && toast.error(error.response.data);
       });
   };
 
@@ -46,10 +44,7 @@ export default function HomePage() {
         setVacations(response.data);
       })
       .catch((error) => {
-        toast.error(
-          "There is a problem with loading vacations: ",
-          error.response
-        );
+        toast.error(error.response.data);
         history.push("/unauthorized");
       });
   };
@@ -90,6 +85,7 @@ export default function HomePage() {
       </Container>
       <Container maxWidth="md" component="main">
         <Calendar
+          key={vacations}
           vacations={vacations}
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}

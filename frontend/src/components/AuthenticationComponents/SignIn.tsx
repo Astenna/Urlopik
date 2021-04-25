@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import {
   isUserSignedIn,
   jwtToLocalStorage,
@@ -20,6 +19,7 @@ import {
 } from "../../helpers/AuthenticationHelpers";
 import history from "../../helpers/History";
 import { loginUrl } from "../../helpers/ApiURLs";
+import { toast } from "react-toastify";
 
 export const SignIn = () => {
   const classes = useFormStyles();
@@ -38,8 +38,8 @@ export const SignIn = () => {
           history.push("/home-page");
         }
       })
-      .catch(() => {
-        toast.error("Invalid username / password");
+      .catch((error) => {
+        toast.error(error.response.data);
         history.push("/unauthorized");
       });
   };

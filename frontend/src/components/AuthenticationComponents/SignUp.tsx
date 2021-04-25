@@ -38,14 +38,10 @@ export const SignUp = () => {
     axios
       .post(newUserUrl, postData)
       .then(() => {
-        toast("Successfully created a new user", {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        toast.success("Successfully created a new user");
       })
-      .catch(() => {
-        toast.error("There is a problem with creating a new user", {
-          position: toast.POSITION.TOP_CENTER,
-        });
+      .catch((error) => {
+        toast.error(error.response.data);
       });
   };
   return (

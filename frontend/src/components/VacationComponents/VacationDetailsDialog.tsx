@@ -34,22 +34,19 @@ export const VacationDetailsDialog = ({ open, setOpen, details }) => {
           setVacationDetails(mapVacationToEvent(response.data))
         )
         .catch((error) => {
-          toast.error(
-            "There is a problem with getting details of this event: ",
-            error.response
-          );
+          toast.error(error.response.data);
         });
     }
   }, [vacationId]);
 
   const handleDelete = () => {
     const deleteVacationRequest = `${vacationsUrl}/${vacationId}`;
-    axios.delete(deleteVacationRequest).catch((error) => {
-      toast.error(
-        "There is a problem with deleting this event:",
-        error.response
-      );
-    });
+    axios
+      .delete(deleteVacationRequest)
+      .then(() => toast.success("Successfully deleted a vacation"))
+      .catch((error) => {
+        toast.error(error.response.data);
+      });
     setOpen(false);
   };
 
