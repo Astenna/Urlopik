@@ -1,29 +1,50 @@
 import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import { mapVacationToEvent } from "./utils";
 
 export const Calendar = ({
   vacations,
   newVacationDetailsVisible,
   setNewVacationDetailsVisible,
+  newVacationVisible,
+  setNewVacationVisible,
+  setClickInfo,
 }) => {
-  const [events, setEvents] = useState(vacations);
-  console.log(events);
+  const [events, setEvents] = useState([] as any);
 
   const vacationClicked = (clickInfo) => {
-    console.log(clickInfo.event.title);
     setNewVacationDetailsVisible(!newVacationDetailsVisible);
+    setClickInfo(clickInfo);
   };
 
-  useEffect(() => setEvents(vacations), [vacations]);
+  useEffect(() => {
+    const mappedEvents = vacations.map((vacation) =>
+      mapVacationToEvent(vacation)
+    );
+    setEvents(mappedEvents);
+  }, [vacations]);
+
   return (
     <FullCalendar
       editable={true}
       plugins={[dayGridPlugin]}
       initialView="dayGridMonth"
-      timeZone="UTC+2"
       events={events}
       eventClick={(clickInfo) => vacationClicked(clickInfo)}
+      displayEventTime={false}
+      headerToolbar={{
+        left: "title",
+        right: "planVacation prev,next today",
+      }}
+      customButtons={{
+        planVacation: {
+          text: "Plan Vacation",
+          click: () => {
+            setNewVacationVisible(!newVacationVisible);
+          },
+        },
+      }}
     />
   );
 };

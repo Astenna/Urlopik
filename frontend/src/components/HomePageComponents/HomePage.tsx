@@ -12,6 +12,7 @@ import history from "../../helpers/History";
 import axios from "axios";
 import { vacationsUrl } from "../../helpers/ApiURLs";
 import { toast } from "react-toastify";
+import { RequestedVacations } from "../VacationComponents/RequestedVacationsDialog";
 
 export default function HomePage() {
   const classes = useHomePageStyles();
@@ -19,50 +20,48 @@ export default function HomePage() {
   const [newVacationDetailsVisible, setNewVacationDetailsVisible] = useState(
     false
   );
+  const [requestedVacationsVisible, setRequestedVacationsVisible] = useState(
+    false
+  );
+  const [clickInfo, setClickInfo] = useState(false);
 
   const [vacations, setVacations] = useState([] as any);
 
   const createVacation = (newVacationData) => {
-    // axios
-    //   .post(vacationsUrl, newVacationData)
-    //   .then(({ data }) => {
-    //     const { oldVacations } = vacations;
-    //     const newVacations = [...oldVacations, data];
-    //     setVacations(newVacations);
-    //   })
-    //   .catch((error) => {
-    //     toast.error(
-    //       "There is a problem with creating a new vacation: ",
-    //       error.response
-    //     );
-    //   });
+    axios
+      .post(vacationsUrl, newVacationData)
+      .then(({ data }) => {
+        const { oldVacations } = vacations;
+        const newVacations = [...oldVacations, data];
+        toast.success("Successfully created a vacation");
+        setVacations(newVacations);
+      })
+      .catch((error) => {
+        error.response && toast.error(error.response.data);
+      });
+  };
+
+  const getVacations = () => {
+    axios
+      .get(vacationsUrl)
+      .then((response) => {
+        setVacations(response.data);
+      })
+      .catch((error) => {
+        toast.error(error.response.data);
+        history.push("/unauthorized");
+      });
   };
 
   useEffect(() => {
     getVacations();
   }, []);
 
-  const getVacations = () => {
-    axios
-      .get(vacationsUrl)
-      .then((response) => {
-        setVacations(response);
-      })
-      .catch((error) => {
-        toast.error(
-          "There is a problem with loading vacations: ",
-          error.response
-        );
-        history.push("/unauthorized");
-      });
-  };
-
   return (
     <React.Fragment>
       <CssBaseline />
       <NavBar
-        setNewVacationVisible={setNewVacationVisible}
-        newVacationVisible={newVacationVisible}
+        setRequestedVacationsVisible={() => setRequestedVacationsVisible}
       />
       {
         <VacationDialog
@@ -92,17 +91,28 @@ export default function HomePage() {
       </Container>
       <Container maxWidth="md" component="main">
         <Calendar
+          key={vacations}
           vacations={vacations}
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
+          newVacationVisible={newVacationVisible}
+          setNewVacationVisible={setNewVacationVisible}
+          setClickInfo={setClickInfo}
         />
-        {/* {
+        {
           <VacationDetailsDialog
             open={newVacationDetailsVisible}
             setOpen={setNewVacationDetailsVisible}
-            details={vacations}
+            details={clickInfo}
           />
-        } */}
+        }
+        {
+          <RequestedVacations
+            open={requestedVacationsVisible}
+            setOpen={setRequestedVacationsVisible}
+            vacations={vacations}
+          />
+        }
       </Container>
       <Footer />
     </React.Fragment>

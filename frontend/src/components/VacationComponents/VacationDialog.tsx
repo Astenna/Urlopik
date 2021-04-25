@@ -10,12 +10,12 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { toString } from "ramda";
+import { toString, values } from "ramda";
+import { vacationTypes } from "../HomePageComponents/utils";
 
 export const VacationDialog = ({ open, setOpen, createVacation }) => {
   const classes = useFormStyles();
-  const vacationTypes = ["Vacation", "Sick leave", "On request"];
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(1);
   const [from, setFrom] = useState(moment().format("yyyy-MM-DD"));
   const [to, setTo] = useState(moment().format("yyyy-MM-DD"));
   const [description, setDescription] = useState("");
@@ -40,13 +40,15 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
       className={classes.form}
     >
       <Paper className={classes.paper}>
-        <DialogTitle>Plan your vacation</DialogTitle>
+        <DialogTitle className={classes.dialogTitle}>
+          Plan your vacation
+        </DialogTitle>
         <Select
           value={type}
-          onChange={(event) => setType(toString(event.target.value))}
+          onChange={(event) => setType(parseInt(toString(event.target.value)))}
         >
-          {vacationTypes.map((type, i) => (
-            <MenuItem key={i} value={i}>
+          {values(vacationTypes).map((type, i) => (
+            <MenuItem key={i} value={i + 1}>
               {type}
             </MenuItem>
           ))}
@@ -68,24 +70,26 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={() => setOpen(false)}
-        >
-          Cancel
-        </Button>
+        <div className={classes.buttons}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </Paper>
     </Dialog>
   );

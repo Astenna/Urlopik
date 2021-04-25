@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import history from "./helpers/History";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { Router, Switch, Route } from "react-router-dom";
 import {
   setAuthorizationToken,
@@ -12,6 +12,7 @@ import { SignIn, SignUp } from "./components/AuthenticationComponents/index";
 import HomePage from "./components/HomePageComponents/HomePage"; ///////////
 import { CircularProgress } from "@material-ui/core";
 import { Unauthorized } from "./components/AuthenticationComponents/Unauthorized";
+import "react-toastify/dist/ReactToastify.css";
 
 export const App = () => {
   const [redirectTo500, setRedirectTo500] = useState(false);
@@ -37,11 +38,13 @@ export const App = () => {
 
       if (error.response && error.response.status === 401) {
         history.push("/unauthorized");
+        toast.error(error.response.data);
         return error;
       }
 
       if (error.response && error.response.status === 500) {
         setRedirectTo500(true);
+        toast.error(error.response.data);
         return error;
       }
 
@@ -70,6 +73,7 @@ export const App = () => {
           <Route path="/unauthorized" component={Unauthorized} />
         </Switch>
         {loading && <CircularProgress />}
+        <ToastContainer />;
       </div>
     </Router>
   );

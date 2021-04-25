@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import {
   isUserSignedIn,
   jwtToLocalStorage,
@@ -20,6 +19,7 @@ import {
 } from "../../helpers/AuthenticationHelpers";
 import history from "../../helpers/History";
 import { loginUrl } from "../../helpers/ApiURLs";
+import { toast } from "react-toastify";
 
 export const SignIn = () => {
   const classes = useFormStyles();
@@ -38,8 +38,8 @@ export const SignIn = () => {
           history.push("/home-page");
         }
       })
-      .catch(() => {
-        toast.error("Invalid username / password");
+      .catch((error) => {
+        toast.error(error.response.data);
         history.push("/unauthorized");
       });
   };
@@ -56,7 +56,7 @@ export const SignIn = () => {
 
   return (
     <Container maxWidth="xs">
-      <div className={classes.paper}>
+      <div className={classes.signing}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -88,15 +88,17 @@ export const SignIn = () => {
             onChange={(event) => setPassword(event.target.value)}
             id="password"
           />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign In
-          </Button>
+          <div className={classes.buttons}>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={handleSubmit}
+            >
+              Sign In
+            </Button>
+          </div>
           <Grid container>
             <Grid item xs>
               <Link href="/sign-up" variant="body2">
