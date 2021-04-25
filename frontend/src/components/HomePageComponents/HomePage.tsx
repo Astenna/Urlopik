@@ -12,11 +12,15 @@ import history from "../../helpers/History";
 import axios from "axios";
 import { vacationsUrl } from "../../helpers/ApiURLs";
 import { toast } from "react-toastify";
+import { RequestedVacations } from "../VacationComponents/RequestedVacationsDialog";
 
 export default function HomePage() {
   const classes = useHomePageStyles();
   const [newVacationVisible, setNewVacationVisible] = useState(false);
   const [newVacationDetailsVisible, setNewVacationDetailsVisible] = useState(
+    false
+  );
+  const [requestedVacationsVisible, setRequestedVacationsVisible] = useState(
     false
   );
   const [clickInfo, setClickInfo] = useState(false);
@@ -56,7 +60,9 @@ export default function HomePage() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavBar />
+      <NavBar
+        setRequestedVacationsVisible={() => setRequestedVacationsVisible}
+      />
       {
         <VacationDialog
           open={newVacationVisible}
@@ -98,6 +104,13 @@ export default function HomePage() {
             open={newVacationDetailsVisible}
             setOpen={setNewVacationDetailsVisible}
             details={clickInfo}
+          />
+        }
+        {
+          <RequestedVacations
+            open={requestedVacationsVisible}
+            setOpen={setRequestedVacationsVisible}
+            vacations={vacations}
           />
         }
       </Container>

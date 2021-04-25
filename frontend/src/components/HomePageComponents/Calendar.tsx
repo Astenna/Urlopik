@@ -35,12 +35,12 @@ export const Calendar = ({
       displayEventTime={false}
       headerToolbar={{
         left: "title",
-        right: "myCustomButton prev,next today",
+        right: "planVacation prev,next today",
       }}
       customButtons={{
-        myCustomButton: {
+        planVacation: {
           text: "Plan Vacation",
-          click: function () {
+          click: () => {
             setNewVacationVisible(!newVacationVisible);
           },
         },
