@@ -14,6 +14,7 @@ namespace Urlopik.Application.Mapper
             CreateMap<Vacation, VacationViewModel>()
                 .ForMember(dest => dest.VacationerName, 
                     src => src.MapFrom(x => ConcatenateNameAndSurname(x.Vacationer)));
+            CreateMap<VacationTypeDto, VacationType>();
         }
 
         private string ConcatenateNameAndSurname(User user)
