@@ -7,7 +7,12 @@ export const RequestedVacations = ({ open = false, setOpen, vacations }) => {
 
   return (
     <Dialog open={open}>
-      <DialogTitle>Manage requested vacations</DialogTitle>
+      <DialogTitle
+        aria-labelledby="simple-dialog-title"
+        className={classes.form}
+      >
+        Manage requested vacations
+      </DialogTitle>
       <RequestedVacationsList vacations={vacations} />
       <Button
         fullWidth
