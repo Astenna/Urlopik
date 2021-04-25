@@ -1,7 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Text;
-using Urlopik.Persistence.Models;
 
 namespace Urlopik.Application.Dtos
 {
