@@ -35,6 +35,7 @@ namespace Urlopik.Application.Services.VacationService
         {
             var vacations = _urlopikDbContext.Vacations
                 .Include(x => x.Type)
+                .Include(x => x.Vacationer)
                 .AsQueryable();
 
             var filteredVacations = await _queryBuilder.With(vacations)
@@ -45,7 +46,6 @@ namespace Urlopik.Application.Services.VacationService
                 .SearchByDescription(vacationsQuery.Description)
                 .AsQueryable()
                 .ToListAsync();
-
 
             return _mapper.Map<List<VacationViewModel>>(filteredVacations);
         }
@@ -113,7 +113,9 @@ namespace Urlopik.Application.Services.VacationService
 
         private async Task<Vacation> GetVacationByIdOrThrowAsync(int vacationId)
         {
-            var vacation = await _urlopikDbContext.Vacations.SingleOrDefaultAsync(x => x.Id == vacationId);
+            var vacation = await _urlopikDbContext.Vacations
+                .Include(x => x.Vacationer)
+                .SingleOrDefaultAsync(x => x.Id == vacationId);
 
             if (vacation is null)
             {
