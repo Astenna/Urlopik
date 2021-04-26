@@ -9,12 +9,12 @@ export const vacationTypes = {
 export const mapVacationToEvent = (vacation) => {
   return {
     id: vacation.id,
-    start: vacation.start,
-    end: vacation.end,
+    start: vacation.dateFrom,
+    end: vacation.dateTo,
     description: vacation.description,
     typeId: vacation.typeId,
     color: mapTypeToColor(vacation.typeId),
-    title: "Tomasz Zawadzki",
+    title: vacation.vacationerName,
     allDay: true,
   };
 };
