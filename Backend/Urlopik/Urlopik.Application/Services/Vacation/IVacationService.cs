@@ -13,5 +13,6 @@ namespace Urlopik.Application.Services.VacationService
         Task<VacationViewModel> GetVacationByIdAsync(int vacationId);
         Task<VacationViewModel> UpdateAsync(int vacationId, VacationDto vacationDto);
         Task<List<VacationViewModel>> GetVacations(VacationsQuery vacationsQuery);
+        Task HrAcceptAsync(int vacationId);
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Urlopik.Application.Dtos;
 using Urlopik.Application.Queries;
 using Urlopik.Application.Services.VacationService;
+using Urlopik.Persistence.Models;
 
 namespace Urlopik.Controllers
 {
@@ -52,6 +53,13 @@ namespace Urlopik.Controllers
         {
             var updatedVacation = await _vacationService.UpdateAsync(id, vacationDto);
             return Ok(updatedVacation);
+        }
+
+        [HttpPut("hr-acceptance/{id}")]
+        public async Task<IActionResult> AcceptAsync([FromRoute] int id)
+        {
+            await _vacationService.HrAcceptAsync(id);
+            return NoContent();
         }
     }
 }

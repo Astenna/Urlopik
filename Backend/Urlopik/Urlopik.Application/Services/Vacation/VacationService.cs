@@ -44,6 +44,8 @@ namespace Urlopik.Application.Services.VacationService
                 .SearchByTypeId(vacationsQuery.TypeId)
                 .SearchByVacationerId(vacationsQuery.VacationerId)
                 .SearchByDescription(vacationsQuery.Description)
+                .SearchByHrAccepted(vacationsQuery.HrAccepted)
+                .SearchBySupervisorAccepted(vacationsQuery.SupervisorAccepted)
                 .AsQueryable()
                 .ToListAsync();
 
@@ -108,6 +110,14 @@ namespace Urlopik.Application.Services.VacationService
             }
 
             _urlopikDbContext.Remove(vacationToRemove);
+            await _urlopikDbContext.SaveChangesAsync();
+        }
+
+        public async Task HrAcceptAsync(int vacationId)
+        {
+            var vacationToAccept = await GetVacationByIdOrThrowAsync(vacationId);
+            vacationToAccept.HrAccepted = true;
+            _urlopikDbContext.Update(vacationToAccept);
             await _urlopikDbContext.SaveChangesAsync();
         }
 

@@ -12,6 +12,8 @@ namespace Urlopik.Application.Queries
         IVacationsQueryBuilder SearchByLaterThan(DateTime? laterThan);
         IVacationsQueryBuilder SearchByTypeId(int? typeId);
         IVacationsQueryBuilder SearchByVacationerId(int? vacationerId);
+        IVacationsQueryBuilder SearchByHrAccepted(bool? accepted);
+        IVacationsQueryBuilder SearchBySupervisorAccepted(bool? accepted);
         IVacationsQueryBuilder With(IQueryable<Vacation> query);
-    }
+    }                                                           
 }

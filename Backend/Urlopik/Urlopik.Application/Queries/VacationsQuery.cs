@@ -13,5 +13,9 @@ namespace Urlopik.Application.Queries
         public DateTime? EarlierThan { get; set; }
 
         public string Description { get; set; }
+
+        public bool? HrAccepted { get; set; }
+
+        public bool? SupervisorAccepted { get; set; }
     }
 }

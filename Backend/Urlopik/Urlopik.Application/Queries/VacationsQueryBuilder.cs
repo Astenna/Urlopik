@@ -72,5 +72,27 @@ namespace Urlopik.Application.Queries
 
             return this;
         }
+
+        public IVacationsQueryBuilder SearchByHrAccepted(bool? accepted)
+        {
+            if (accepted.HasValue)
+            {
+                _vacationsQuery = _vacationsQuery
+                    .Where(x => x.HrAccepted == accepted);
+            }
+
+            return this;
+        }
+
+        public IVacationsQueryBuilder SearchBySupervisorAccepted(bool? accepted)
+        {
+            if (accepted.HasValue)
+            {
+                _vacationsQuery = _vacationsQuery
+                    .Where(x => x.SupervisorAccepted == accepted);
+            }
+
+            return this;
+        }
     }
 }
