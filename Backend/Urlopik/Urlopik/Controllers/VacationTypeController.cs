@@ -24,5 +24,12 @@ namespace Urlopik.Controllers
             var createdType = await _vacationTypeService.AddAsync(vacationDto);
             return Ok(createdType);
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var types = _vacationTypeService.Get();
+            return Ok(types);
+        }
     }
 }

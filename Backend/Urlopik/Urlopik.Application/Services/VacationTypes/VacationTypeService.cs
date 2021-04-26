@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Urlopik.Application.Dtos;
@@ -44,6 +45,12 @@ namespace Urlopik.Application.Services.VacationTypes
             await _urlopikDbContext.AddAsync(newType);
             await _urlopikDbContext.SaveChangesAsync();
             return newType;
+        }
+
+        public List<VacationType> Get()
+        {
+            var types = _urlopikDbContext.VacationTypes.ToList();
+            return types;
         }
     }
 }
