@@ -25,6 +25,7 @@ export const Calendar = ({
     setEvents(mappedEvents);
   }, [vacations]);
 
+  console.log(vacations, events);
   return (
     <FullCalendar
       editable={true}
