@@ -13,6 +13,8 @@ import axios from "axios";
 import { vacationsUrl } from "../../helpers/ApiURLs";
 import { toast } from "react-toastify";
 import { RequestedVacations } from "../VacationComponents/RequestedVacationsDialog";
+import { getJwtTokenFromLocalStorage } from "../../helpers/AuthenticationHelpers";
+import jwt_decode from "jwt-decode";
 
 export default function HomePage() {
   const classes = useHomePageStyles();
@@ -26,6 +28,7 @@ export default function HomePage() {
   const [clickInfo, setClickInfo] = useState(false);
 
   const [vacations, setVacations] = useState([] as any);
+  const [user, setUser] = useState({ firstName: "Some", lastName: "User" });
 
   const createVacation = (newVacationData) => {
     axios
@@ -55,7 +58,13 @@ export default function HomePage() {
 
   useEffect(() => {
     getVacations();
+    getUserData();
   }, []);
+
+  const getUserData = () => {
+    const jwtToken = getJwtTokenFromLocalStorage() || "";
+    setUser(jwt_decode(jwtToken));
+  };
 
   return (
     <React.Fragment>
@@ -86,12 +95,11 @@ export default function HomePage() {
           color="textSecondary"
           component="p"
         >
-          Plan your vacation!
+          Hello {user.firstName} {user.lastName}, plan your vacation!
         </Typography>
       </Container>
       <Container maxWidth="md" component="main">
         <Calendar
-          key={vacations}
           vacations={vacations}
           newVacationDetailsVisible={newVacationDetailsVisible}
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
