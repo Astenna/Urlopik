@@ -1,7 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Text;
-using Urlopik.Persistence.Models;
 
 namespace Urlopik.Application.Dtos
 {
@@ -26,6 +23,8 @@ namespace Urlopik.Application.Dtos
         {
             RuleFor(x => x.Password.Length > 6);
             RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.FirstName).NotEmpty();
+            RuleFor(x => x.LastName).NotEmpty();
             RuleFor(x => x.Email).NotEmpty();
         }
     }

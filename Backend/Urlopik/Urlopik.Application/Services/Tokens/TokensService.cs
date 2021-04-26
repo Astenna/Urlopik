@@ -47,6 +47,8 @@ namespace Urlopik.Application.Services.Tokens
         {
             var claims = new List<Claim> {
                 new Claim("email", user.Email),
+                new Claim("firstName", user.FirstName),
+                new Claim("lastName", user.LastName),
                 new Claim("role", user.Role.ToString())
             };
 

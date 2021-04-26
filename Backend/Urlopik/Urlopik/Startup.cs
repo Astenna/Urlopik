@@ -20,6 +20,7 @@ using Urlopik.Application.Options;
 using Urlopik.Application.Queries;
 using Urlopik.Application.Services;
 using Urlopik.Application.Services.Tokens;
+using Urlopik.Application.Services.VacationTypes;
 using Urlopik.Application.Services.VacationService;
 using Urlopik.Extensions;
 using Urlopik.Persistence;
@@ -94,6 +95,7 @@ namespace Urlopik
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVacationService, VacationService>();
+            services.AddScoped<IVacationTypeService, VacationTypeService>();
             services.AddScoped<IVacationsQueryBuilder, VacationsQueryBuilder>();
 
             services.AddControllers()
