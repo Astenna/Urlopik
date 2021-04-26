@@ -32,6 +32,7 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
     };
     createVacation(newVacation);
     setOpen(false);
+    setTimeout(() => window.location.reload(), 100);
   };
   return (
     <Dialog

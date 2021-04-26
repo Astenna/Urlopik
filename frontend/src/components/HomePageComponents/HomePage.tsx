@@ -36,8 +36,8 @@ export default function HomePage() {
       .then(({ data }) => {
         const { oldVacations } = vacations;
         const newVacations = [...oldVacations, data];
-        toast.success("Successfully created a vacation");
         setVacations(newVacations);
+        setTimeout(() => window.location.reload(), 100);
       })
       .catch((error) => {
         error.response && toast.error(error.response.data);
