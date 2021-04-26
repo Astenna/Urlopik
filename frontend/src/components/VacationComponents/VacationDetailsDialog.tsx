@@ -43,7 +43,9 @@ export const VacationDetailsDialog = ({ open, setOpen, details }) => {
     const deleteVacationRequest = `${vacationsUrl}/${vacationId}`;
     axios
       .delete(deleteVacationRequest)
-      .then(() => toast.success("Successfully deleted a vacation"))
+      .then(() => {
+        setTimeout(() => window.location.reload(), 100);
+      })
       .catch((error) => {
         toast.error(error.response.data);
       });
