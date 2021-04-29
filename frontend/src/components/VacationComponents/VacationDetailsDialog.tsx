@@ -14,7 +14,15 @@ import { toast } from "react-toastify";
 import { isNil } from "ramda";
 import { mapVacationToEvent, vacationTypes } from "../HomePageComponents/utils";
 
-export const VacationDetailsDialog = ({ open, setOpen, details }) => {
+export const VacationDetailsDialog = ({
+  open,
+  setOpen,
+  details,
+  newVacationEditDialogVisible,
+  setNewVacationEditDialogVisible,
+  passVacationId,
+  setPassVacationId,
+}) => {
   const classes = useFormStyles();
   const [dialogOpen, setDialogOpen] = useState(open);
   const [vacationId, setVacationId] = useState(null);
@@ -23,7 +31,7 @@ export const VacationDetailsDialog = ({ open, setOpen, details }) => {
   useEffect(() => {
     setDialogOpen(open);
     details && setVacationId(details.event._def.publicId);
-  }, [open]);
+  }, [open, details]);
 
   useEffect(() => {
     if (!isNil(vacationId)) {
@@ -38,6 +46,12 @@ export const VacationDetailsDialog = ({ open, setOpen, details }) => {
         });
     }
   }, [vacationId]);
+
+  const handleEdit = () => {
+    setNewVacationEditDialogVisible(!newVacationEditDialogVisible);
+    setPassVacationId(vacationId);
+    setOpen(false);
+  };
 
   const handleDelete = () => {
     const deleteVacationRequest = `${vacationsUrl}/${vacationId}`;
@@ -84,14 +98,15 @@ export const VacationDetailsDialog = ({ open, setOpen, details }) => {
                 </DialogContentText>
               </div>
             )}
+
             <Button
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => setOpen(false)}
+              onClick={handleEdit}
             >
-              Close
+              Edit
             </Button>
             <Button
               fullWidth
@@ -101,6 +116,16 @@ export const VacationDetailsDialog = ({ open, setOpen, details }) => {
               onClick={handleDelete}
             >
               Delete
+            </Button>
+
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => setOpen(false)}
+            >
+              Close
             </Button>
           </Paper>
         </Dialog>
