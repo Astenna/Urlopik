@@ -39,23 +39,25 @@ export const VacationEditDialog = ({
   }, [open, details]);
 
   useEffect(() => {
+    setType(vacationDetails.typeId);
+    setFrom(moment(vacationDetails.start).format("yyyy-MM-DD"));
+    setTo(moment(vacationDetails.end).format("yyyy-MM-DD"));
+    setDescription(vacationDetails.description);
+  }, [vacationDetails]);
+
+  useEffect(() => {
     if (!isNil(vacationId)) {
       const getVacationRequest = `${vacationsUrl}/${vacationId}`;
       axios
         .get(getVacationRequest)
         .then((response) => {
           setVacationDetails(mapVacationToEvent(response.data));
-          setType(vacationDetails.typeId);
-          setFrom(moment(vacationDetails.start).format("yyyy-MM-DD"));
-          setTo(moment(vacationDetails.end).format("yyyy-MM-DD"));
-          setDescription(vacationDetails.description);
         })
         .catch((error) => {
           toast.error(error.response.data);
         });
-      console.log(vacationDetails);
     }
-  }, [vacationId, vacationDetails]);
+  }, [vacationId]);
 
   const handleEdit = () => {
     const editVacationRequest = `${vacationsUrl}/${vacationId}`;
