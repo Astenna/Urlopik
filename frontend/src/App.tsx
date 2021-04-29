@@ -73,7 +73,7 @@ export const App = () => {
           <Route path="/unauthorized" component={Unauthorized} />
         </Switch>
         {loading && <CircularProgress />}
-        <ToastContainer />;
+        <ToastContainer />
       </div>
     </Router>
   );

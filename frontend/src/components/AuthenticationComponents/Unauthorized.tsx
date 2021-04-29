@@ -7,7 +7,7 @@ export const Unauthorized = () => {
 
   return (
     <Container maxWidth="xs">
-      <div className={classes.paper}>
+      <div className={classes.signing}>
         <Typography component="h1" variant="h5">
           401 - Unauthorized
         </Typography>
