@@ -29,9 +29,19 @@ services:
             - postgres
         restart: unless-stopped
 
-    urlopik:
-        container_name: urlopik
-        build: .
+    frontend:
+        container_name: urlopik-frontend
+        build: ./frontend
+        # image: docker.pkg.github.com/astenna/urlopik/urlopik-frontend:1.3.0
+        ports: 
+            - "3000:80"
+        networks:
+            - postgres
+        restart: unless-stopped
+
+    backend:
+        container_name: urlopik-backend
+        build: ./Backend/Urlopik
         environment:
             - ASPNETCORE_URLS=https://+;http://+;
         ports: 
