@@ -8,6 +8,7 @@ import { NavBar } from "./NavBar";
 import { VacationDialog } from "../VacationComponents/VacationDialog";
 import { Calendar } from "./Calendar";
 import { VacationDetailsDialog } from "../VacationComponents/VacationDetailsDialog";
+import { VacationEditDialog } from "../VacationComponents/VacationEditDialog";
 import history from "../../helpers/History";
 import axios from "axios";
 import { vacationsUrl } from "../../helpers/ApiURLs";
@@ -22,11 +23,15 @@ export default function HomePage() {
   const [newVacationDetailsVisible, setNewVacationDetailsVisible] = useState(
     false
   );
+  const [
+    newVacationEditDialogVisible,
+    setNewVacationEditDialogVisible,
+  ] = useState(false);
   const [requestedVacationsVisible, setRequestedVacationsVisible] = useState(
     false
   );
   const [clickInfo, setClickInfo] = useState(false);
-
+  const [passVacationId, setPassVacationId] = useState(null);
   const [vacations, setVacations] = useState([] as any);
   const [user, setUser] = useState({ firstName: "Some", lastName: "User" });
 
@@ -111,6 +116,19 @@ export default function HomePage() {
           <VacationDetailsDialog
             open={newVacationDetailsVisible}
             setOpen={setNewVacationDetailsVisible}
+            newVacationEditDialogVisible={newVacationEditDialogVisible}
+            setNewVacationEditDialogVisible={setNewVacationEditDialogVisible}
+            passVacationId={passVacationId}
+            setPassVacationId={setPassVacationId}
+            details={clickInfo}
+          />
+        }
+        {
+          <VacationEditDialog
+            open={newVacationEditDialogVisible}
+            setOpen={setNewVacationEditDialogVisible}
+            passVacationId={passVacationId}
+            setPassVacationId={setPassVacationId}
             details={clickInfo}
           />
         }
