@@ -29,6 +29,10 @@ export const useFormStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 2, 2),
     width: "150px",
   },
+  detailsButtons: {
+    margin: theme.spacing(0, 1, 0),
+    width: "100px",
+  },
   close: {
     margin: theme.spacing(3, 0, 0),
     textAlign: "center",

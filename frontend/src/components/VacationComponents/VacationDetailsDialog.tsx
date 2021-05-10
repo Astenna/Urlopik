@@ -75,9 +75,11 @@ export const VacationDetailsDialog = ({
           className={classes.form}
         >
           <Paper className={classes.paper}>
-            <DialogTitle>Vacation Details</DialogTitle>
+            <DialogTitle className={classes.dialogTitle}>
+              Vacation Details
+            </DialogTitle>
             {details && (
-              <div>
+              <div className={classes.dialogTitle}>
                 <DialogContentText>
                   Vacationer: {vacationDetails.title}
                 </DialogContentText>
@@ -98,35 +100,36 @@ export const VacationDetailsDialog = ({
                 </DialogContentText>
               </div>
             )}
+            <div className="row">
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.detailsButtons}
+                onClick={handleEdit}
+              >
+                Edit
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.detailsButtons}
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
 
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleEdit}
-            >
-              Edit
-            </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={() => setOpen(false)}
-            >
-              Close
-            </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.detailsButtons}
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </Button>
+            </div>
           </Paper>
         </Dialog>
       )}
