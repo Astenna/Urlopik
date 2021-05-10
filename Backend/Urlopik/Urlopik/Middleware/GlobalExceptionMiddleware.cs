@@ -48,6 +48,10 @@ namespace Urlopik.Middleware
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(apiException.Message));
                     break;
+                case ForbiddenAccessException forbiddenException:
+                    context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(forbiddenException.Message));
+                    break;
                 case FluentValidation.ValidationException validationException:
                     context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(validationException.Message));

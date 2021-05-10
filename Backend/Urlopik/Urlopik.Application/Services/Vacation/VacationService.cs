@@ -66,6 +66,8 @@ namespace Urlopik.Application.Services.VacationService
 
             var vacation = _mapper.Map<Vacation>(vacationDto);
             vacation.VacationerId = user.Id;
+            vacation.HrAccepted = user.Role == Roles.Hr;
+
             await _urlopikDbContext.AddAsync(vacation);
             await _urlopikDbContext.SaveChangesAsync();
 
@@ -77,9 +79,9 @@ namespace Urlopik.Application.Services.VacationService
             var user = _httpContext.GetUserUsingClaimsOrThrow(_urlopikDbContext);
             var vacationToEdit = await GetVacationByIdOrThrowAsync(vacationId);
 
-            if (vacationToEdit.VacationerId != user.Id)
+            if (vacationToEdit.VacationerId != user.Id && user.Role != Roles.Administartor)
             {
-                throw new ApiException($"Vacation can be edited only by its owner");
+                throw new ForbiddenAccessException("Vacation can be edited only by its owner or by Administrator");
             }
 
             ValidateVactionTypeOrThrow(vacationDto.TypeId);
@@ -102,11 +104,11 @@ namespace Urlopik.Application.Services.VacationService
 
             if (vacationToRemove.VacationerId != user.Id && user.Role != Roles.Administartor)
             {
-                throw new ApiException($"Vacation can be edited only by its owner or by Administrator");
+                throw new ForbiddenAccessException("Vacation can be edited only by its owner or by Administrator");
             }
             if (vacationToRemove.DateFrom < DateTime.Now)
             {
-                throw new ApiException($"Vacation from the past cannot be removed");
+                throw new ApiException("Vacation from the past cannot be removed");
             }
 
             _urlopikDbContext.Remove(vacationToRemove);
@@ -115,6 +117,12 @@ namespace Urlopik.Application.Services.VacationService
 
         public async Task HrAcceptAsync(int vacationId)
         {
+            var user = _httpContext.GetUserUsingClaimsOrThrow(_urlopikDbContext);
+            if (user.Role != Roles.Administartor && user.Role != Roles.Hr)
+            {
+                throw new ForbiddenAccessException("Vacation can be accepted only by user with Hr or Administrator role!");
+            }
+
             var vacationToAccept = await GetVacationByIdOrThrowAsync(vacationId);
             vacationToAccept.HrAccepted = true;
             _urlopikDbContext.Update(vacationToAccept);
