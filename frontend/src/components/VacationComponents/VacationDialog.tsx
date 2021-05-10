@@ -77,18 +77,18 @@ export const VacationDialog = ({ open, setOpen, createVacation }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={handleSubmit}
+            onClick={() => setOpen(false)}
           >
-            Submit
+            Cancel
           </Button>
           <Button
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={() => setOpen(false)}
+            onClick={handleSubmit}
           >
-            Cancel
+            Submit
           </Button>
         </div>
       </Paper>

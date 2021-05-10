@@ -20,7 +20,7 @@ export const Calendar = ({
 
   useEffect(() => {
     const mappedEvents = vacations.map((vacation) =>
-      mapVacationToEvent(vacation)
+      vacation.hrAccepted ? mapVacationToEvent(vacation) : {}
     );
     setEvents(mappedEvents);
   }, [vacations]);
