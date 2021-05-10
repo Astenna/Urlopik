@@ -4,7 +4,7 @@ import { Box } from "@material-ui/core";
 import { Container } from "@material-ui/core";
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useHomePageStyles } from "./HomePageStyles";
+import { useHomePageStyles } from "../../styles/HomePageStyles";
 
 function Copyright() {
   return (

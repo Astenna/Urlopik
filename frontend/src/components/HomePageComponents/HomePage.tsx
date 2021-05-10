@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import { useHomePageStyles } from "./HomePageStyles";
+import { useHomePageStyles } from "../../styles/HomePageStyles";
 import Container from "@material-ui/core/Container";
 import { Footer } from "./Footer";
 import { NavBar } from "./NavBar";
@@ -33,7 +33,11 @@ export default function HomePage() {
   const [clickInfo, setClickInfo] = useState(false);
   const [passVacationId, setPassVacationId] = useState(null);
   const [vacations, setVacations] = useState([] as any);
-  const [user, setUser] = useState({ firstName: "Some", lastName: "User" });
+  const [user, setUser] = useState({
+    firstName: "Some",
+    lastName: "User",
+    role: "Employee",
+  });
 
   const createVacation = (newVacationData) => {
     axios
@@ -76,6 +80,7 @@ export default function HomePage() {
       <CssBaseline />
       <NavBar
         setRequestedVacationsVisible={() => setRequestedVacationsVisible}
+        user={user}
       />
       {
         <VacationDialog
@@ -85,14 +90,8 @@ export default function HomePage() {
         />
       }
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="textPrimary"
-          gutterBottom
-        >
-          Calendar
+        <Typography variant="h3" align="center">
+          Hello {user.firstName} {user.lastName}
         </Typography>
         <Typography
           variant="h5"
@@ -100,7 +99,7 @@ export default function HomePage() {
           color="textSecondary"
           component="p"
         >
-          Hello {user.firstName} {user.lastName}, plan your vacation!
+          Your role: {user.role}
         </Typography>
       </Container>
       <Container maxWidth="md" component="main">
