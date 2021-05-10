@@ -18,7 +18,9 @@ export const useHomePageStyles = makeStyles((theme) => ({
   toolbarTitle: {
     flexGrow: 1,
     textAlign: "left",
-    marginLeft: theme.spacing(4),
+  },
+  role: {
+    textAlign: "center",
   },
   toolbarPriviledge: {
     flexGrow: 1,

@@ -27,9 +27,9 @@ export const useFormStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 2, 2),
-    display: "inline-block",
     width: "150px",
   },
+  close: {},
   buttons: {
     alignItems: "center",
   },

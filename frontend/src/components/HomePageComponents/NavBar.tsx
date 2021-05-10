@@ -1,8 +1,10 @@
 import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
-import { useHomePageStyles } from "./HomePageStyles";
+import { useHomePageStyles } from "../../styles/HomePageStyles";
 import { removeToken } from "../../helpers/AuthenticationHelpers";
 
-export const NavBar = ({ setRequestedVacationsVisible }) => {
+export const NavBar = ({ setRequestedVacationsVisible, user }) => {
+  const isHr = user.role == "Hr";
+  console.log(user.role);
   const classes = useHomePageStyles();
   return (
     <AppBar
@@ -15,19 +17,21 @@ export const NavBar = ({ setRequestedVacationsVisible }) => {
         <Typography
           variant="h6"
           color="inherit"
-          noWrap
           className={classes.toolbarTitle}
         >
           Urlopek
         </Typography>
-        <Button
-          onClick={setRequestedVacationsVisible(true)}
-          color="primary"
-          variant="outlined"
-          className={classes.link}
-        >
-          Requested vacations
-        </Button>
+
+        {isHr && (
+          <Button
+            onClick={setRequestedVacationsVisible(true)}
+            color="primary"
+            variant="outlined"
+            className={classes.link}
+          >
+            Requested vacations
+          </Button>
+        )}
         <Button
           onClick={removeToken}
           color="primary"

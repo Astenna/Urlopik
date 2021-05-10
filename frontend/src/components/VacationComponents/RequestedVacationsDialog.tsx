@@ -9,20 +9,31 @@ export const RequestedVacations = ({ open = false, setOpen, vacations }) => {
     <Dialog open={open}>
       <DialogTitle
         aria-labelledby="simple-dialog-title"
-        className={classes.form}
+        className={classes.dialogTitle}
       >
         Manage requested vacations
       </DialogTitle>
       <RequestedVacationsList vacations={vacations} />
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={() => setOpen(false)}
-      >
-        Close
-      </Button>
+      <div className={classes.buttons}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={() => setOpen(false)}
+        >
+          Close
+        </Button>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={() => setOpen(false)}
+        >
+          Submit
+        </Button>
+      </div>
     </Dialog>
   );
 };

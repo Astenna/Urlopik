@@ -5,13 +5,16 @@ import {
   TableCell,
   TableRow,
   TableBody,
+  Checkbox,
 } from "@material-ui/core";
 import { useState } from "react";
 import moment from "moment";
+import { useFormStyles } from "../../styles/FormStyles";
 export const RequestedVacationsList = ({ vacations }) => {
   const [rows, setRows] = useState(vacations);
+  const classes = useFormStyles();
 
-  const columns = ["Name", "Reason", "From", "To", "Description"];
+  const columns = ["Name", "Reason", "From", "To", "Description", "Accepted"];
 
   return (
     <Paper>
@@ -27,16 +30,15 @@ export const RequestedVacationsList = ({ vacations }) => {
           {rows.map(
             (row) =>
               !row.hrAccepted && (
-                <TableRow key={row.id}>
-                  <TableCell align="center">{row.vacationerId}</TableCell>
-                  <TableCell align="center">{row.typeId}</TableCell>
-                  <TableCell align="center">
+                <TableRow key={row.id} className={classes.dialogTitle}>
+                  <TableCell>{row.vacationerId}</TableCell>
+                  <TableCell>{row.typeId}</TableCell>
+                  <TableCell>
                     {moment(row.start).format("DD-MM-YYYY")}
                   </TableCell>
-                  <TableCell align="center">
-                    {moment(row.end).format("DD-MM-YYYY")}
-                  </TableCell>
-                  <TableCell align="center">{row.description}</TableCell>
+                  <TableCell>{moment(row.end).format("DD-MM-YYYY")}</TableCell>
+                  <TableCell>{row.description}</TableCell>
+                  <Checkbox checked={row.hrAccepted.value} />
                 </TableRow>
               )
           )}
