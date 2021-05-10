@@ -41,7 +41,7 @@ export const VacationEditDialog = ({
   useEffect(() => {
     setType(vacationDetails.typeId);
     setFrom(moment(vacationDetails.start).format("yyyy-MM-DD"));
-    setTo(moment(vacationDetails.end).format("yyyy-MM-DD"));
+    setTo(moment(vacationDetails.end).add(-1, "days").format("yyyy-MM-DD"));
     setDescription(vacationDetails.description);
   }, [vacationDetails]);
 
