@@ -3,8 +3,9 @@ import { useHomePageStyles } from "../../styles/HomePageStyles";
 import { removeToken } from "../../helpers/AuthenticationHelpers";
 
 export const NavBar = ({ setRequestedVacationsVisible, user }) => {
-  const isHr = user.role == "Hr";
-  console.log(user.role);
+  const requestedVacationsVisible =
+    user.role === "Hr" || user.role === "Administartor";
+
   const classes = useHomePageStyles();
   return (
     <AppBar
@@ -22,7 +23,7 @@ export const NavBar = ({ setRequestedVacationsVisible, user }) => {
           Urlopek
         </Typography>
 
-        {isHr && (
+        {requestedVacationsVisible && (
           <Button
             onClick={setRequestedVacationsVisible(true)}
             color="primary"

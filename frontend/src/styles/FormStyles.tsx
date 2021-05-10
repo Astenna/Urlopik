@@ -29,8 +29,15 @@ export const useFormStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 2, 2),
     width: "150px",
   },
-  close: {},
+  close: {
+    margin: theme.spacing(3, 0, 0),
+    textAlign: "center",
+    width: "100%",
+  },
   buttons: {
     alignItems: "center",
+  },
+  table: {
+    minWidth: "1000px",
   },
 }));
