@@ -93,7 +93,10 @@ export const VacationDetailsDialog = ({
                 </DialogContentText>
                 <DialogContentText>
                   {/* End Date: {details.event._instance.range.end.toString()} */}
-                  End Date: {moment(vacationDetails.end).format("DD-MM-YYYY")}
+                  End Date:{" "}
+                  {moment(vacationDetails.end)
+                    .add(-1, "days")
+                    .format("DD-MM-YYYY")}
                 </DialogContentText>
                 <DialogContentText>
                   Description: {vacationDetails.description}
