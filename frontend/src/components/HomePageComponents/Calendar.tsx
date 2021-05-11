@@ -9,6 +9,8 @@ export const Calendar = ({
   setNewVacationDetailsVisible,
   newVacationVisible,
   setNewVacationVisible,
+  filterVisible,
+  setFilterVisible,
   setClickInfo,
 }) => {
   const [events, setEvents] = useState([] as any);
@@ -20,7 +22,8 @@ export const Calendar = ({
 
   useEffect(() => {
     const mappedEvents = vacations.map((vacation) =>
-      vacation.hrAccepted ? mapVacationToEvent(vacation) : {}
+      // vacation.hrAccepted ? mapVacationToEvent(vacation) : {}
+      mapVacationToEvent(vacation)
     );
     setEvents(mappedEvents);
   }, [vacations]);
@@ -36,13 +39,19 @@ export const Calendar = ({
       displayEventTime={false}
       headerToolbar={{
         left: "title",
-        right: "planVacation prev,next today",
+        right: "filter planVacation prev,next today",
       }}
       customButtons={{
         planVacation: {
           text: "Plan Vacation",
           click: () => {
             setNewVacationVisible(!newVacationVisible);
+          },
+        },
+        filter: {
+          text: "Filter",
+          click: () => {
+            setFilterVisible(!filterVisible);
           },
         },
       }}

@@ -9,6 +9,7 @@ import { VacationDialog } from "../VacationComponents/VacationDialog";
 import { Calendar } from "./Calendar";
 import { VacationDetailsDialog } from "../VacationComponents/VacationDetailsDialog";
 import { VacationEditDialog } from "../VacationComponents/VacationEditDialog";
+import { FilterDialog } from "../VacationComponents/FilterDialog";
 import history from "../../helpers/History";
 import axios from "axios";
 import { vacationsUrl } from "../../helpers/ApiURLs";
@@ -20,6 +21,7 @@ import jwt_decode from "jwt-decode";
 export default function HomePage() {
   const classes = useHomePageStyles();
   const [newVacationVisible, setNewVacationVisible] = useState(false);
+  const [filterVisible, setFilterVisible] = useState(false);
   const [newVacationDetailsVisible, setNewVacationDetailsVisible] = useState(
     false
   );
@@ -37,6 +39,13 @@ export default function HomePage() {
     firstName: "Some",
     lastName: "User",
     role: "Employee",
+  });
+  const [filterData, setFilterData] = useState({
+    typeId: "",
+    vacationerId: "",
+    earlierThan: "",
+    laterThan: "",
+    description: "",
   });
 
   const createVacation = (newVacationData) => {
@@ -65,10 +74,34 @@ export default function HomePage() {
       });
   };
 
+  const filterVacations = (filterData) => {
+    axios
+      .get(vacationsUrl, {
+        params: {
+          typeId: filterData.typeId,
+          vacationerId: filterData.userId,
+          earlierThan: filterData.earlierThan,
+          laterThan: filterData.laterThan,
+          description: filterData.description,
+        },
+      })
+      .then((response) => {
+        setVacations(response.data);
+      })
+      .catch((error) => {
+        toast.error(error.response.data);
+        history.push("/unauthorized");
+      });
+  };
+
   useEffect(() => {
     getVacations();
     getUserData();
   }, []);
+
+  useEffect(() => {
+    filterVacations(filterData);
+  }, [filterData]);
 
   const getUserData = () => {
     const jwtToken = getJwtTokenFromLocalStorage() || "";
@@ -87,6 +120,13 @@ export default function HomePage() {
           open={newVacationVisible}
           setOpen={setNewVacationVisible}
           createVacation={createVacation}
+        />
+      }
+      {
+        <FilterDialog
+          open={filterVisible}
+          setOpen={setFilterVisible}
+          filterVacation={filterVacations}
         />
       }
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
@@ -109,6 +149,8 @@ export default function HomePage() {
           setNewVacationDetailsVisible={setNewVacationDetailsVisible}
           newVacationVisible={newVacationVisible}
           setNewVacationVisible={setNewVacationVisible}
+          filterVisible={filterVisible}
+          setFilterVisible={setFilterVisible}
           setClickInfo={setClickInfo}
         />
         {
